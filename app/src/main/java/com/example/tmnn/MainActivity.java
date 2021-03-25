@@ -2,26 +2,58 @@ package com.example.tmnn;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.SparseBooleanArray;
+import android.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
     ItemsList[] items;
     ListView _myList;
     CustomListItemAdapter adapter;
+
+    Button btnDatHang;
+    String[] IDMonAn;
     static final String EXTRA_TEXT = "com.example.application.example.EXTRA_TEXT";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        btnDatHang = findViewById(R.id.btnDatMon);
         prepareDate();
         _myList = (ListView) findViewById(R.id.myList);
         adapter = new CustomListItemAdapter(this, R.layout.list_item_lnk_img, items, EXTRA_TEXT);
         _myList.setAdapter(adapter);
-    }
+        _myList.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
+        btnDatHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String tag = "";
+                IDMonAn = new String[10];
+                int k = 0;
+                for (int i = 0; i<items.length; i++)
+                {
+                    if (items[i].isSelected()) {
+                        tag = tag + i + "";
+                        IDMonAn[k++] = String.valueOf(i);
+                    }
+                }
+            }
+        });
 
+    }
     public void prepareDate(){
         items = new ItemsList[10];
         items[0] = new ItemsList("Bún chả",

@@ -9,15 +9,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 public class CustomListItemAdapter extends ArrayAdapter<ItemsList> {
     Context context;
     ItemsList[] items;
     String EXTRA_TEXT;
 
-     public CustomListItemAdapter(Context context, int layoutTobeInflated, ItemsList[] items, String EXTRA_TEXT){
+
+
+    public CustomListItemAdapter(Context context, int layoutTobeInflated, ItemsList[] items, String EXTRA_TEXT){
         super(context, R.layout.list_item_lnk_img, items);
         this.context = context;
         this.items = items;
@@ -38,6 +44,20 @@ public class CustomListItemAdapter extends ArrayAdapter<ItemsList> {
              }
          }
      };
+    private CompoundButton.OnCheckedChangeListener itemChangeChecked = new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (isChecked){
+                int i = Integer.parseInt(buttonView.getTag().toString());
+                items[i].setSelected(true);
+            }
+            else {
+                int i = Integer.parseInt(buttonView.getTag().toString());
+                items[i].setSelected(false);
+            }
+
+        }
+    };
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -55,10 +75,15 @@ public class CustomListItemAdapter extends ArrayAdapter<ItemsList> {
 
         foodImage.setImageResource(items[position].getFoodImage());
 
+        CheckBox cbSelected = row.findViewById(R.id.cbFood);
+        cbSelected.setChecked(items[position].isSelected());
+        cbSelected.setTag(position);
+        cbSelected.setOnCheckedChangeListener( itemChangeChecked);
+
         foodName.setOnClickListener(itemClickLítener);
         foodLocation.setOnClickListener(itemClickLítener);
-
         return row;
+
     }
 
     public void onBrowseClick(View v) {

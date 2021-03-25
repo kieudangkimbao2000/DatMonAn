@@ -3,7 +3,7 @@ package com.example.tmnn;
 public class ItemsList {
     private String foodName, foodLink, foodLocation, foodDetails;
     private int foodImage;
-
+    private  boolean isSelected;
     public ItemsList(){}
 
     public ItemsList(String foodName, String foodLink, String foodLocation, int foodImage, String foodDetails){
@@ -49,4 +49,12 @@ public class ItemsList {
     }
 
     public void setFoodDetails(String foodDetails) { this.foodDetails = foodDetails; }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
 }

@@ -4,6 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChotDon">
+    tools:context=".ChotDonActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="485dp"
+            android:orientation="vertical">
+
+            <ListView
+                android:id="@+id/foodCheckedList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="#ffcc00"
+                android:dividerHeight="2dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="119dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/edtDiaChi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Địa chỉ"
+                    android:inputType="textPostalAddress" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnChotDon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Chốt đơn" />
+        </LinearLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

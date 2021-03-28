@@ -13,15 +13,32 @@
         tools:layout_editor_absoluteX="147dp"
         tools:layout_editor_absoluteY="86dp">
 
-        <Button
-            android:id="@+id/btnDatMon"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Đặt món" />
+            android:layout_height="626dp"
+            android:orientation="horizontal">
 
-        <ListView
-            android:id="@+id/myList"
+            <ListView
+                android:id="@+id/myList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="#ffcc00"
+                android:dividerHeight="2dp">
+
+            </ListView>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnDatMon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Đặt món" />
+        </LinearLayout>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

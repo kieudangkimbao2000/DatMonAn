@@ -9,19 +9,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class CustomListItemAdapter extends ArrayAdapter<ItemsList> {
+public class CustomListItemAdapter extends ArrayAdapter<Item> {
     Context context;
-    ItemsList[] items;
-    String EXTRA_TEXT;
+    Item[] items;
 
-     public CustomListItemAdapter(Context context, int layoutTobeInflated, ItemsList[] items, String EXTRA_TEXT){
+     public CustomListItemAdapter(Context context, int layoutTobeInflated, Item[] items){
         super(context, R.layout.list_item_lnk_img, items);
         this.context = context;
         this.items = items;
-        this.EXTRA_TEXT = EXTRA_TEXT;
      }
 
      private View.OnClickListener itemClickLítener = new View.OnClickListener(){
@@ -29,15 +29,32 @@ public class CustomListItemAdapter extends ArrayAdapter<ItemsList> {
          public void onClick(View v) {
              switch (v.getId()){
                  case R.id.tvName:
+                     int i = Integer.parseInt(v.getTag().toString());
                      Intent intent = new Intent(context, ChiTietActivity.class);
-                     intent.putExtra(EXTRA_TEXT, v.getTag().toString());
+                     intent.putExtra("Chi tiet", items[i]);
                      context.startActivity(intent);
                      return;
                  case R.id.tvLocation:
                      onBrowseClick(v);
+                     return;
              }
          }
      };
+
+    private CompoundButton.OnCheckedChangeListener itemChangeChecked = new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (isChecked){
+                int i = Integer.parseInt(buttonView.getTag().toString());
+                items[i].setSelected(true);
+            }
+            else {
+                int i = Integer.parseInt(buttonView.getTag().toString());
+                items[i].setSelected(false);
+            }
+
+        }
+    };
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -48,12 +65,19 @@ public class CustomListItemAdapter extends ArrayAdapter<ItemsList> {
         ImageView foodImage = (ImageView) row.findViewById(R.id.ivFood);
 
         foodName.setText(items[position].getFoodName());
-        foodName.setTag(items[position].getFoodDetails());
+        foodName.setTag(position);
 
         foodLocation.setText(items[position].getFoodLocation());
         foodLocation.setTag(items[position].getFoodLink());
 
         foodImage.setImageResource(items[position].getFoodImage());
+
+        CheckBox cbSelected = row.findViewById(R.id.cbFood);
+        cbSelected.setChecked(items[position].isSelected());
+        cbSelected.setTag(position);
+
+        cbSelected.setOnCheckedChangeListener( itemChangeChecked);
+
 
         foodName.setOnClickListener(itemClickLítener);
         foodLocation.setOnClickListener(itemClickLítener);

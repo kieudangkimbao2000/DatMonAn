@@ -16,4 +16,5 @@ public class ItemsList implements Serializable {
     public void setItems(Item[] items) {
         this.items = items;
     }
+
 }

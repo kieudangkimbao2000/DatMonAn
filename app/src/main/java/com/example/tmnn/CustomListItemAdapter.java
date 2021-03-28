@@ -14,11 +14,12 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
 public class CustomListItemAdapter extends ArrayAdapter<Item> {
     Context context;
     Item[] items;
 
-     public CustomListItemAdapter(Context context, int layoutTobeInflated, Item[] items){
+    public CustomListItemAdapter(Context context, int layoutTobeInflated, Item[] items){
         super(context, R.layout.list_item_lnk_img, items);
         this.context = context;
         this.items = items;
@@ -77,12 +78,12 @@ public class CustomListItemAdapter extends ArrayAdapter<Item> {
         cbSelected.setTag(position);
 
         cbSelected.setOnCheckedChangeListener( itemChangeChecked);
-
+        cbSelected.setOnCheckedChangeListener( itemChangeChecked);
 
         foodName.setOnClickListener(itemClickLítener);
         foodLocation.setOnClickListener(itemClickLítener);
-
         return row;
+
     }
 
     public void onBrowseClick(View v) {

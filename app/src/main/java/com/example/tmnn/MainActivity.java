@@ -1,11 +1,22 @@
 package com.example.tmnn;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.nfc.Tag;
+import android.os.Bundle;
+import android.util.Log;
+import android.util.SparseBooleanArray;
+import android.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -24,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         _myList = (ListView) findViewById(R.id.myList);
         adapter = new CustomListItemAdapter(this, R.layout.list_item_lnk_img, items);
         _myList.setAdapter(adapter);
-
         btnDatMon = (Button) findViewById(R.id.btnDatMon);
         btnDatMon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
     public void prepareDate(){
         items = new Item[10];
         items[0] = new Item(1, "Bún chả",
